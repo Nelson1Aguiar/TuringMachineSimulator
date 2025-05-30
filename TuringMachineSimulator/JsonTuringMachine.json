@@ -1,0 +1,46 @@
+﻿{
+    "word": "ababa",
+    "states": [ "q0", "q1", "h" ],
+    "input_alphabet": [ "a", "b" ],
+    "tape_alphabet": [ "a", "b", "⊔" ],
+    "blank": "⊔",
+    "max_steps": 50,
+    "initial_symbol": "⊢",
+    "initial_state": "q0",
+    "accept_state": "h",
+    "reject_state": null,
+    "transitions": {
+        "q0,a": {
+            "next_state": "q1",
+            "write": "b"
+        },
+        "q0,b": {
+            "next_state": "q1",
+            "write": "a"
+        },
+        "q0,⊔": {
+            "next_state": "h",
+            "write": "⊔"
+        },
+        "q0,⊢": {
+            "next_state": "q0",
+            "move": "R"
+        },
+        "q1,a": {
+            "next_state": "q0",
+            "move": "R"
+        },
+        "q1,b": {
+            "next_state": "q0",
+            "move": "R"
+        },
+        "q1,⊔": {
+            "next_state": "q0",
+            "move": "R"
+        },
+        "q1,⊢": {
+            "next_state": "q1",
+            "move": "R"
+        }
+    }
+}
