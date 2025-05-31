@@ -9,9 +9,8 @@ public class Configuration : IConfiguration
                                         throw new ArgumentNullException("Máquina inválida");
 
         machine.InitialSymbol ??= "⊢";
-
-        if (machine.MaxSteps != null && machine.MaxSteps > 0)
-            return new Simulator(machine, machine.MaxSteps.Value);
+        machine.BlankSymbol ??= "⊔";
+        machine.MaxSteps ??= 100;
         
         return new Simulator(machine);
     }

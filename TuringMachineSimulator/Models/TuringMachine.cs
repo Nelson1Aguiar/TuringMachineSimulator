@@ -15,7 +15,7 @@ public class TuringMachine
     public string BlankSymbol { get; set; }
 
     [JsonPropertyName("initial_symbol")]
-    public string? InitialSymbol { get; set; }
+    public string InitialSymbol { get; set; }
 
     [JsonPropertyName("initial_state")]
     public string InitialState { get; set; }

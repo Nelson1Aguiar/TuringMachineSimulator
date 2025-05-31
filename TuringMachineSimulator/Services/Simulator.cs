@@ -7,6 +7,7 @@ public class Simulator
     private string _wordToInit;
     private long _stepLimit;
     private int _headPosition;
+    private char _blankSymbol;
     private string _currentState;
     private long _currentStep;
     private bool _continueSimulation;
@@ -17,7 +18,8 @@ public class Simulator
     {
         _machine = machine;
         _wordToInit = machine.Word;
-        _stepLimit = stepLimit;
+        _stepLimit = machine.MaxSteps.Value;
+        _blankSymbol = machine.BlankSymbol.FirstOrDefault();
         _headPosition = 0;
         _currentStep = 0;
         _continueSimulation = true;
@@ -32,7 +34,7 @@ public class Simulator
 
             _wordComplete = new List<char> { _machine.InitialSymbol!.FirstOrDefault() };
             _wordComplete.AddRange(_wordToInit.ToCharArray());
-            _wordComplete.Add(_machine.BlankSymbol.FirstOrDefault());
+            _wordComplete.Add(_blankSymbol);
 
             _headPosition = 1;
             _currentState = _machine.InitialState;
@@ -99,7 +101,7 @@ public class Simulator
                         case Movements.Right:
                             _headPosition++;
                             if (_headPosition >= _wordComplete.Count)
-                                _wordComplete.Add(_machine.BlankSymbol.FirstOrDefault());
+                                _wordComplete.Add(_blankSymbol);
                             break;
                         default:
                             break;
@@ -163,7 +165,7 @@ public class Simulator
             return _machine.TapeAlphabet.Contains(char.ToString(symbol));
 
         return _machine.InputAlphabet.Contains(char.ToString(symbol)) 
-                                || Equals(symbol, _machine.BlankSymbol.FirstOrDefault())
+                                || Equals(symbol, _blankSymbol)
                                 || Equals(symbol, _machine.InitialSymbol!.FirstOrDefault());
     }
 
