@@ -7,7 +7,7 @@ public class Program
     {
         try
         {
-            bool acceptWord = false;
+            bool? acceptWord = false;
             string stopState = string.Empty;
 
             IConfiguration configuration = ConfigureServices();
@@ -22,7 +22,10 @@ public class Program
 
             Console.WriteLine(stopState);
 
-            Console.WriteLine($"A palavra foi {(acceptWord ? "aceita" : "negada")}");
+            if (acceptWord == null)
+                Console.WriteLine("A máquina de Turing não aceitou a palavra, pois não chegou a um estado de aceitação ou rejeição.");
+            else
+                Console.WriteLine($"A palavra foi {(acceptWord.Value ? "aceita" : "negada")}");
 
             Console.WriteLine("Deseja imprimir as computações? \n\r1 - Sim\n\r2 - Não");
 

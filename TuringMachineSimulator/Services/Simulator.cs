@@ -25,11 +25,11 @@ public class Simulator
         _continueSimulation = true;
     }
 
-    public (bool, string) InitSimulation()
+    public (bool?, string) InitSimulation()
     {
         try
         {
-            bool acceptWord = false;
+            bool? acceptWord = false;
             string stopState = string.Empty;
 
             _wordComplete = new List<char> { _machine.InitialSymbol!.FirstOrDefault() };
@@ -52,6 +52,7 @@ public class Simulator
             }
 
             acceptWord = string.Equals(_currentState, _machine.AcceptState);
+            acceptWord = !string.Equals(_currentState, _machine.AcceptState) && !string.Equals(_currentState, _machine.RejectState) ? null : acceptWord;
 
             stopState = $"Passo {_currentStep}: Estado={_currentState}, Posição={_headPosition}, Lendo={_wordComplete[_headPosition]}, Palavra={new string(_wordComplete.ToArray())}";
 
